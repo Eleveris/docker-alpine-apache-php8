@@ -5,7 +5,26 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
 
 # Add basics first
 RUN apk update && apk upgrade && apk add \
-	bash apache2 php8-apache2 curl ca-certificates openssl openssh git php8 php8-phar php8-json php8-iconv php8-openssl tzdata openntpd mercurial subversion unzip nano mysql-client
+	bash \
+  nano \
+  apache2 \
+  php8-apache2 \
+  curl \
+  ca-certificates \
+  openssl \
+  openssh \
+  git \
+  mercurial \
+  subversion \
+  php8 \
+  php8-phar \
+  php8-json \
+  php8-iconv \
+  php8-openssl \
+  tzdata \
+  openntpd \
+  unzip \
+  mysql-client
 
 # Setup apache and php
 RUN apk add \
