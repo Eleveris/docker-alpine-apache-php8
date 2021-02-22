@@ -1,117 +1,115 @@
 # Alpine LAP Server with Extensions
 
-Provides a basic LAP stack using Alpine, Apache2 and PHP7, loading in the various extensions along the way (see Dockerfile for full list).
+Provides a basic LAP stack using Alpine, Apache2 and php8, loading in the various extensions along the way (see Dockerfile for full list).
 
 Should allow you to get going with a full LAP stack and support for DB via linked container (such as mysql) with ease, allowing you to fine tune various aspects of the server and php via environment variables.
 
-
 ## Included in this image
 
-bash, apache2, php7, php7-apache2, curl, ca-certificates, git
+bash, apache2, php8, php8-apache2, curl, ca-certificates, git, mercurial, subversion, unzip, nano
 
-php7-phar, php7-mcrypt, php7-soap, php7-openssl, php7-gmp, php7-pdo_odbc, php7-json, php7-dom, php7-pdo, php7-zip, php7-mysqli, php7-sqlite3, php7-pdo_pgsql, php7-bcmath, php7-gd, php7-odbc, php7-pdo_mysql, php7-pdo_sqlite, php7-gettext, php7-xmlreader, php7-xmlrpc, php7-bz2, php7-iconv, php7-pdo_dblib, php7-curl, php7-ctype, php7-session, php7-redis.
-
+php8-phar, php8-json, php8-iconv, php8-openssl, php8-ftp, php8-mbstring, php8-soap, php8-gmp, php8-pdo_odbc, php8-dom, php8-pdo, php8-zip, php8-mysqli, php8-sqlite3, php8-pdo_pgsql, php8-bcmath, php8-gd, php8-odbc, php8-pdo_mysql, php8-pdo_sqlite, php8-gettext, php8-xml, php8-xmlreader, php8-xmlwriter, php8-tokenizer, php8-bz2, php8-pdo_dblib, php8-curl, php8-ctype, php8-session, php8-redis, php8-exif, php8-intl, php8-fileinfo, php8-ldap, php8-pecl-apcu, php8-pecl-mcrypt, php8-pecl-xdebug, php8-pecl-xmlrpc, php8-opcache php8-simplexml
 
 ## Environment Variables
 
 Various env vars can be set at runtime via your docker command or docker-compose environment section.
 
-__APACHE_SERVER_NAME:__ Change server name to match your domain name in httpd.conf
+**APACHE_DOCUMENT_ROOT:** Change document root in httpd.conf (Default: /app/public)
 
-__PHP_SHORT_OPEN_TAG:__ Maps to php.ini 'short_open_tag'
+**APACHE_SERVER_NAME:** Change server name to match your domain name in httpd.conf
 
-__PHP_OUTPUT_BUFFERING:__ Maps to php.ini 'output_buffering'
+**PHP_SHORT_OPEN_TAG:** Maps to php.ini 'short_open_tag'
 
-__PHP_OPEN_BASEDIR:__ Maps to php.ini 'open_basedir'
+**PHP_OUTPUT_BUFFERING:** Maps to php.ini 'output_buffering'
 
-__PHP_MAX_EXECUTION_TIME:__ Maps to php.ini 'max_execution_time'
+**PHP_OPEN_BASEDIR:** Maps to php.ini 'open_basedir'
 
-__PHP_MAX_INPUT_TIME:__ Maps to php.ini 'max_input_time'
+**PHP_MAX_EXECUTION_TIME:** Maps to php.ini 'max_execution_time'
 
-__PHP_MAX_INPUT_VARS:__ Maps to php.ini 'max_input_vars'
+**PHP_MAX_INPUT_TIME:** Maps to php.ini 'max_input_time'
 
-__PHP_MEMORY_LIMIT:__ Maps to php.ini 'memory_limit'
+**PHP_MAX_INPUT_VARS:** Maps to php.ini 'max_input_vars'
 
-__PHP_ERROR_REPORTING:__ Maps to php.ini 'error_reporting'
+**PHP_MEMORY_LIMIT:** Maps to php.ini 'memory_limit'
 
-__PHP_DISPLAY_ERRORS:__ Maps to php.ini 'display_errors'
+**PHP_ERROR_REPORTING:** Maps to php.ini 'error_reporting'
 
-__PHP_DISPLAY_STARTUP_ERRORS:__ Maps to php.ini 'display_startup_errors'
+**PHP_DISPLAY_ERRORS:** Maps to php.ini 'display_errors'
 
-__PHP_LOG_ERRORS:__ Maps to php.ini 'log_errors'
+**PHP_DISPLAY_STARTUP_ERRORS:** Maps to php.ini 'display_startup_errors'
 
-__PHP_LOG_ERRORS_MAX_LEN:__ Maps to php.ini 'log_errors_max_len'
+**PHP_LOG_ERRORS:** Maps to php.ini 'log_errors'
 
-__PHP_IGNORE_REPEATED_ERRORS:__ Maps to php.ini 'ignore_repeated_errors'
+**PHP_LOG_ERRORS_MAX_LEN:** Maps to php.ini 'log_errors_max_len'
 
-__PHP_REPORT_MEMLEAKS:__ Maps to php.ini 'report_memleaks'
+**PHP_IGNORE_REPEATED_ERRORS:** Maps to php.ini 'ignore_repeated_errors'
 
-__PHP_HTML_ERRORS:__ Maps to php.ini 'html_errors'
+**PHP_REPORT_MEMLEAKS:** Maps to php.ini 'report_memleaks'
 
-__PHP_ERROR_LOG:__ Maps to php.ini 'error_log'
+**PHP_HTML_ERRORS:** Maps to php.ini 'html_errors'
 
-__PHP_POST_MAX_SIZE:__ Maps to php.ini 'post_max_size'
+**PHP_ERROR_LOG:** Maps to php.ini 'error_log'
 
-__PHP_DEFAULT_MIMETYPE:__ Maps to php.ini 'default_mimetype'
+**PHP_POST_MAX_SIZE:** Maps to php.ini 'post_max_size'
 
-__PHP_DEFAULT_CHARSET:__ Maps to php.ini 'default_charset'
+**PHP_DEFAULT_MIMETYPE:** Maps to php.ini 'default_mimetype'
 
-__PHP_FILE_UPLOADS:__ Maps to php.ini 'file_uploads'
+**PHP_DEFAULT_CHARSET:** Maps to php.ini 'default_charset'
 
-__PHP_UPLOAD_TMP_DIR:__ Maps to php.ini 'upload_tmp_dir'
+**PHP_FILE_UPLOADS:** Maps to php.ini 'file_uploads'
 
-__PHP_UPLOAD_MAX_FILESIZE:__ Maps to php.ini 'upload_max_filesize'
+**PHP_UPLOAD_TMP_DIR:** Maps to php.ini 'upload_tmp_dir'
 
-__PHP_MAX_FILE_UPLOADS:__ Maps to php.ini 'max_file_uploads'
+**PHP_UPLOAD_MAX_FILESIZE:** Maps to php.ini 'upload_max_filesize'
 
-__PHP_ALLOW_URL_FOPEN:__ Maps to php.ini 'allow_url_fopen'
+**PHP_MAX_FILE_UPLOADS:** Maps to php.ini 'max_file_uploads'
 
-__PHP_ALLOW_URL_INCLUDE:__ Maps to php.ini 'allow_url_include'
+**PHP_ALLOW_URL_FOPEN:** Maps to php.ini 'allow_url_fopen'
 
-__PHP_DEFAULT_SOCKET_TIMEOUT:__ Maps to php.ini 'default_socket_timeout'
+**PHP_ALLOW_URL_INCLUDE:** Maps to php.ini 'allow_url_include'
 
-__PHP_DATE_TIMEZONE:__ Maps to php.ini 'date.timezone'
+**PHP_DEFAULT_SOCKET_TIMEOUT:** Maps to php.ini 'default_socket_timeout'
 
-__PHP_PDO_MYSQL_CACHE_SIZE:__ Maps to php.ini 'pdo_mysql.cache_size'
+**PHP_DATE_TIMEZONE:** Maps to php.ini 'date.timezone'
 
-__PHP_PDO_MYSQL_DEFAULT_SOCKET:__ Maps to php.ini 'pdo_mysql.default_socket'
+**PHP_PDO_MYSQL_CACHE_SIZE:** Maps to php.ini 'pdo_mysql.cache_size'
 
-__PHP_SESSION_SAVE_HANDLER:__ Maps to php.ini 'session.save_handler'
+**PHP_PDO_MYSQL_DEFAULT_SOCKET:** Maps to php.ini 'pdo_mysql.default_socket'
 
-__PHP_SESSION_SAVE_PATH:__ Maps to php.ini 'session.save_path'
+**PHP_SESSION_SAVE_HANDLER:** Maps to php.ini 'session.save_handler'
 
-__PHP_SESSION_USE_STRICT_MODE:__ Maps to php.ini 'session.use_strict_mode'
+**PHP_SESSION_SAVE_PATH:** Maps to php.ini 'session.save_path'
 
-__PHP_SESSION_USE_COOKIES:__ Maps to php.ini 'session.use_cookies'
+**PHP_SESSION_USE_STRICT_MODE:** Maps to php.ini 'session.use_strict_mode'
 
-__PHP_SESSION_COOKIE_SECURE:__ Maps to php.ini 'session.cookie_secure'
+**PHP_SESSION_USE_COOKIES:** Maps to php.ini 'session.use_cookies'
 
-__PHP_SESSION_NAME:__ Maps to php.ini 'session.name'
+**PHP_SESSION_COOKIE_SECURE:** Maps to php.ini 'session.cookie_secure'
 
-__PHP_SESSION_COOKIE_LIFETIME:__ Maps to php.ini 'session.cookie_lifetime'
+**PHP_SESSION_NAME:** Maps to php.ini 'session.name'
 
-__PHP_SESSION_COOKIE_PATH:__ Maps to php.ini 'session.cookie_path'
+**PHP_SESSION_COOKIE_LIFETIME:** Maps to php.ini 'session.cookie_lifetime'
 
-__PHP_SESSION_COOKIE_DOMAIN:__ Maps to php.ini 'session.cookie_domain'
+**PHP_SESSION_COOKIE_PATH:** Maps to php.ini 'session.cookie_path'
 
-__PHP_SESSION_COOKIE_HTTPONLY:__ Maps to php.ini 'session.cookie_httponly'
+**PHP_SESSION_COOKIE_DOMAIN:** Maps to php.ini 'session.cookie_domain'
 
-__PHP_XDEBUG_ENABLED:__ Add this env and give it a value to turn it on, such as true, or On or Awesome, or beer, or socks... Turns on xdebug (which is not for production really)
+**PHP_SESSION_COOKIE_HTTPONLY:** Maps to php.ini 'session.cookie_httponly'
 
+**PHP_XDEBUG_ENABLED:** Add this env and give it a value to turn it on, such as true, or On or Awesome, or beer, or socks... Turns on xdebug (which is not for production really)
 
 ## Usage
 
 To use this image directly, you can use a docker-compose file to keep things nice and simple... if you have a load balancer like traefik and mysql containers running on another docker network, you may have something like this...
 
-
 ```yml
-version: "2"
+version: '2'
 services:
   myservice:
     build: ./
     labels:
-      - "traefik.backend=myservice"
-      - "traefik.frontend.rule=Host:myservice.docker.localhost"
+      - 'traefik.backend=myservice'
+      - 'traefik.frontend.rule=Host:myservice.docker.localhost'
     environment:
       - MYSQL_HOST=mysql
       - APACHE_SERVER_NAME=myservice.docker.localhost
@@ -124,7 +122,7 @@ services:
       - default
     volumes:
       - ./:/app
-	# ADD in permission for setting system time to host system time
+    # ADD in permission for setting system time to host system time
     cap_add:
       - SYS_TIME
       - SYS_NICE
@@ -136,7 +134,7 @@ networks:
 
 Then run...
 
-```bash
+```sh
 docker-compose up -d
 ```
 
@@ -144,9 +142,8 @@ This will patch the container through to traefik load balancer running from anot
 
 If you would like to add to this, expand on this, maybe you don't want to map your volume and want to copy files for a production system. You can create your own Dockerfile based on this image...
 
-```
-FROM ulsmith/alpine-apache-php7
-MAINTAINER You <you@youremail.com>
+```dockerfile
+FROM dre1080/alpine-apache-php8
 
 ADD /public /app/public
 RUN chown -R apache:apache /app
@@ -154,4 +151,4 @@ RUN chown -R apache:apache /app
 
 ## Where Do I Put My Files
 
-Hmmm... you can place them in the /app folder, your application should be placed in the /app folder with public access being pushed through to /app/public. This alloows you to have your src files and other outside the public directory.
+Your public access files should be located at `APACHE_DOCUMENT_ROOT`. This allows you to have your src files and other outside your public directory.
