@@ -24,7 +24,8 @@ RUN apk update && apk upgrade && apk add \
   tzdata \
   openntpd \
   unzip \
-  mysql-client
+  mysql-client \
+  shadow
 
 # Setup apache and php
 RUN apk add \
@@ -108,6 +109,9 @@ RUN { \
 		echo 'ignore_repeated_source = Off'; \
 		echo 'html_errors = Off'; \
 	} > /etc/php8/conf.d/error-logging.ini
+
+# Fix permissions
+RUN usermod -u 1000 apache
 
 COPY docker-entrypoint.sh /usr/local/bin/
 

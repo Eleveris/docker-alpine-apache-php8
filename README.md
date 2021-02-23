@@ -145,8 +145,10 @@ If you would like to add to this, expand on this, maybe you don't want to map yo
 ```dockerfile
 FROM dre1080/alpine-apache-php8
 
-ADD /public /app/public
-RUN chown -R apache:apache /app
+ENV APACHE_DOCUMENT_ROOT /srv/web
+ENV PHP_MEMORY_LIMIT 256M
+
+COPY public /srv/web
 ```
 
 ## Where Do I Put My Files
