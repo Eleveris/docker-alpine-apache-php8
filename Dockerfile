@@ -115,6 +115,11 @@ RUN usermod -u 1000 apache
 
 COPY docker-entrypoint.sh /usr/local/bin/
 
+WORKDIR /var/www/fleet
+COPY fleet/ /var/www/fleet/
+RUN cd /var/www/fleet && \
+    composer install
+
 EXPOSE 80
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["httpd", "-D", "FOREGROUND"]
