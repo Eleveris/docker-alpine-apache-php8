@@ -22,6 +22,9 @@ mkdir -p $APACHE_DOCUMENT_ROOT && \
   chown -R apache:apache $APP_DIR && \
   chmod -R 755 $APP_DIR
 
+cd $APACHE_DOCUMENT_ROOT && \
+  composer install
+
 sed -i "s#^DocumentRoot \".*#DocumentRoot \"$APACHE_DOCUMENT_ROOT\"#g" /etc/apache2/httpd.conf
 sed -i "s#/var/www/localhost/htdocs#$APACHE_DOCUMENT_ROOT#" /etc/apache2/httpd.conf
 
